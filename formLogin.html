@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: ghostwhite;
+            height: 100vh;
+        }
+        .login-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 300px;
+            background: linear-gradient(100deg, rgba(173, 65, 65, 0.1) , rgba(31, 211, 190, 0.732));
+            backdrop-filter: blur;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 8px rgba(0,0,0,0.6);
+            animation: slide-up 0.80s ease-in;
+        }
+        .login-form > h2 {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-shadow: 0px 3px 6px rgb(0, 0, 0, 0.5);
+        }
+        #linkContainer  {
+            text-decoration: none;
+            font-size: 1.75rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: 500;
+            color: #A2A26C;
+            margin-top: 100px;
+        }
+        @keyframes slide-up {
+            0% {
+                transform: translateY(120px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-form">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required><br>
+            <input type="password" id="password" placeholder="Password" required><br>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    <div id="linkContainer"></div>
+    <script>
+        // validated data users for demonstration  
+        let validUsers = [
+            {username: 'user1' , password: 'user1'},
+            {username: 'user2@gmail.com' , password: 'user2greatcode'},
+            {username: 'user3@gmail.com' , password: 'user3greatcode'},
+            {username: 'user4@gmail.com' , password: 'user4greatcode'}
+        ]; 
+        
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            
+            // validation feature for data users that have been included in objec array
+            let isValidUsers = validUsers.some(function(user)  {
+                return user.username === username && user.password === password ;
+            });
+            if (isValidUsers) {
+                alert('Account is validated');
+                let linkContainer = document.getElementById('linkContainer');
+                linkContainer.innerHTML = '<a href="https://regapp.ju.edu.jo/regapp/login.xhtml">Go to the next page</a>'
+            } else {
+                alert('Account is unvalidated. Please re-enter your username and password.');
+                document.getElementById('username').value = '';
+                document.getElementById('password').value = '';
+            }
+        });
+    </script>
+</body>
+</html>
